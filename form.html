@@ -1,0 +1,101 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="mystyle.css" />
+<script>
+function conv(id)
+{
+	var txt=new String(document.getElementById(id).value);
+	document.getElementById(id).value=txt.toUpperCase();
+}
+
+function desc(txt)
+{
+	document.getElementById("desc").innerHTML="Desc:"+txt;
+}
+
+function printdate()
+{
+	var d=new Date();
+	document.getElementById("d1").innerHTML=d;
+	alert('welcome to sign up page');
+}
+
+function validate()
+{
+	var fname=document.my.fn;
+	var lname= document.my.ln;
+	var email= document.my.em;
+	var uname= document.my.un;
+	var ps= document.my.ps;
+	var ps2= document.my.ps2;
+	var vname=/^[a-zA-Z]+$/;
+	var e=/^[a-z]+@[a-z]+.[a-z]{2,4}$/;
+	var pass=/\w/;
+	if(fname.value=="" || lname.value=="" || email.value=="" || uname.value==""|| ps.value==""|| ps2.value=="")
+	{
+		alert('some/all fields are empty');
+		return false;
+	}
+
+	if(fname.value.match(vname))
+	{
+		if(lname.value.match(vname))
+		{
+			if(email.value.match(e))
+			{
+				if(ps.value.match(/\d/) && ps.value.match(/[a-zA-Z]/) && ps.value.match(pass))
+				{
+					if(ps.value==ps2.value)
+						return true;				
+					else
+					{
+						alert('password Fields value not match');
+						ps.focus();
+					}
+				}
+				else
+				{
+					alert('password Field is incorrect');
+					ps.focus();
+				}
+			}
+			else
+			{
+				alert('email Field is incorrect');
+				email.focus();
+			}
+		}
+		else
+		{
+			alert('lastname Field is incorrect');
+			lname.focus();
+		}
+	}
+	else
+	{
+		alert('firstname Field is incorrect');
+		fname.focus();
+	}
+	return false;
+}
+
+
+
+</script>
+</head>
+<body onload=printdate()>
+<pre>
+<p id="d1" align="right"></p>
+<form id="myform" name="my" action="insert.php" method="POST" target="_blank" onsubmit="return validate();">
+Enter Firstname	:<input name="fn" id="fn" onkeyup=conv(id) title="First name of the applicant" onmouseover=desc(title) onmouseout=desc("") type="text" ><br><br>
+Enter Lastname	:<input name="ln" id="ln"  onkeyup=conv(id) title="Last name of the applicant" onmouseover=desc(title) onmouseout=desc("") type="text"><br><br>
+Enter e-mail id	:<input name="em" id="em"   onmouseover=desc(title) onmouseout=desc("")><br><br>
+Enter username	:<input name="un" id="un" type="text" title="User name for your account" onmouseover=desc(title) onmouseout=desc("")><br><br>
+Enter password	:<input name="ps" type="password" name="pass" title="Must atleast be 8 chars" ><br><br>
+Re-enter		:<input name="ps2" type="password" name="repass" ><br><br>
+<input type="submit" value="submit"><br><br>
+<p id="desc"></p>
+</form>
+</pre>
+</body>
+</html>
